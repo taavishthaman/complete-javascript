@@ -1,0 +1,59 @@
+1. Javascript is a High Level, Object Oriented, Multi Paradigm programming language.
+    High Level : Don't have to worry about low level memory management.
+    Object Oriented : Uses the concepts of classes and objects.
+    Multi Paradigm : Different styles of programming can be used (Like Imperative and Declarative).
+
+2. Use camel casing for variable declaration. Variables cannot begin with a number. Variables can only contain
+    alphabets, numbers, underscore and dollar($) sign. Cannot use reserved Javascript keywords to name variables(name is the 
+    only exception, it can be used as a variable, but still should be avoided).
+
+3. Use capitalized variable names for classes (class Person) and uppercase variable names for mathematical constants 
+    (e.g. PI = 3.1415). Variables should be very descriptive.
+
+4. There are 7 types of primitive data types.
+    1. Number : Floating point numbers. Used for decimal and integers.
+    2. Strings : Sequence of characters. Used for text.
+    3. Boolean : True oor False.
+    4. Undefined : Value taken by a variable that is not yet defined. (empty value)
+    5. Null : Also means empty values but used in different curcumstances.
+    6. Symbol : Value that is unique and cannot be changed.
+    7. BigInt : Larger integers than the number type can hold.
+
+    Javascript has dynamic typing. We do not have to manually define data types for variables.
+    typeof undefined variable is also undefined.
+    typeof null is an object. (This is a bug in Javascript).
+
+5. let and const were introduced in es6, var is old javascript.
+   let can be reassigned. (Mutable variable)
+   const is used for variables that are not supposed to change at any point in the future. (Immutable variable)
+   Since const variables are immutable, empty const variables cannot be declared.
+
+6. 2 ** 3 is 2 to the power 3 which is exponentiation operator.
+
+7. `${} hello etc` way of formatting strings is called a template literal. 
+    When you need to create a multiline string just do this:
+
+    const str = `This is
+    a multiline
+    string.`
+
+8. '1771' + 10 will give us 177110. NaN means not a number or an invalid number.
+    Use Number(x) to convert x to number.
+    Use String(x) to convert x to string.
+    Type conversion is the process of changing datatype of a variable manually.
+    Type coercion is where javascript itself changes the datatype of a variable in order for an expression to 
+    evaluate successfully.
+
+9. There are 5 falsy values : null, undefined, '', 0, NaN. They become false when converted to boolean.
+
+10.
+    === is Strict equality operator and == is loose equality operator.
+    === does not perform type coercion. == performs type coercion.
+    != and !== are the not equal variants.
+
+11. if(23 > 11) {  This is a statement
+        const str = '23 is greater than 11';
+    }
+
+    23 > 11 This is an expression
+    a && b || c This is also an expression
