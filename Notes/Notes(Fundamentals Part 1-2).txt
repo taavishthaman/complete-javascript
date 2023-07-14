@@ -13,7 +13,7 @@
 4. There are 7 types of primitive data types.
     1. Number : Floating point numbers. Used for decimal and integers.
     2. Strings : Sequence of characters. Used for text.
-    3. Boolean : True oor False.
+    3. Boolean : True or False.
     4. Undefined : Value taken by a variable that is not yet defined. (empty value)
     5. Null : Also means empty values but used in different curcumstances.
     6. Symbol : Value that is unique and cannot be changed.
@@ -57,3 +57,58 @@
 
     23 > 11 This is an expression
     a && b || c This is also an expression
+
+12. 'use strict' activates strict mode. Strict mode helps us to write safe and secure code.Strict mode forbids us to do 
+    certain things. It also creates errors in the console where standard javascript would simply fail silently. For 
+    example if you misspell a variable name, standard javascript console would not detect it, but using strict mode will 
+    detect it. It also prevents us from using reserved keywords for future version of javascript as variable names. 
+    eg. interface, private etc.
+
+13. function(birthYear) {return 2037 - birthYear} This is an example of function declaration.
+
+    const calcAge2 = function (birthYear) {  This is an example of function expression.
+        return 2037 - birthYear;
+    }
+
+    Function declaration can be called before they are defined. This will not work with function expression.
+
+    const calcAge3 = birthYear => 2037 - birthYear; (Arrow Function, one line and one argument)
+    const makeJuice = (apples, oranges) => {  (Arrow Function with multiple lines and multiple arguments)
+        const applePieces = apples * 4;
+        const orangePieces = oranges * 4;
+        return `We made juice using ${applePieces + orangePieces} fruit pieces.`;
+    }
+
+14. There are 2 ways to initialize arrays:
+    1. const friends = ['Michael', 'Lucifer', 'Gabriel'];
+       const friends = new Array('Michael', 'Lucifer', 'Gabriel');
+
+       Only primitive values are immutable, that's why you cannot change a constant number. However arrays are mutable
+       even if declared using a const.
+
+15. Some array methods:
+    1. push(arg) : Pushes a new element at the end of the array. Also returns the length of the new array.
+    2. unshift(arg) : Pushes a new element at the beginning of the array. Also returns the length of the new array.
+    3. pop() : Removes the last element of the array. Returns the popped element.
+    4. shift() : Removes the first element of the array. Returns the first element.
+    5 indexOf(arg) : Returns the index of the element. Returns -1 if element not present.
+    6 includes(arg) : Returns true if element is present, false otherwise.
+
+16. Use bracket notation when object property needs to be computed or have the property inside a variable.
+    Use dot notation when you already have the object property by name.
+    If you try to access a property that does not exist for an object, you will get undefined.
+
+17. this keyword is the one which calls the property function.
+
+    eg : 
+    const obj = {
+        birthYear : 1997,
+        calcAge : function() {
+            return 2037 - this.birthYear
+        }
+    }
+
+    console.log(obj.calcAge()); Since obj calls the calcAge function, obj is this.
+
+18. break and continue work in for loops, not in for-each loops. If you do not need a loop to depend upon a counter use
+    a while loop.
