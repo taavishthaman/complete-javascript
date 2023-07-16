@@ -9,3 +9,9 @@
     document.querySelector('.className').addEventListener('click', () => {}) to process click events.
     document.querySelector('.className').style.propertyName = value to change CSS properties.
 
+2. Use document.querySelectorAll('.className') to select multiple elements with the same class name.
+    To remove a css style, document.querySelector('.element').classList.remove('class-name')
+    document.querySelector('.className').addEventListener('keydown', function(e){}) to register a keydown event.
+    classList.add('class-name') to add a class.
+    classList.contains('class-name') to check if a class is visible.
+
