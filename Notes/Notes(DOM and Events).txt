@@ -1,0 +1,11 @@
+1. Document Object Model:
+    Structured Representation of HTML Documents. Allows Javascript to access HTML elements and styles to manipulate them.
+    DOM Tree's root node is document. Then the child node is HTML and inside it rest of the tags. DOM is not a part of 
+    Javascript. DOM Methods and properties are part of Web API's and Javascript can interact with them. 
+
+    Use document.querySelector('.className') to select the element which has the class as className.
+    document.querySelector('.className').textContent for text elements and document.querySelector('.className').value 
+    for input elements.
+    document.querySelector('.className').addEventListener('click', () => {}) to process click events.
+    document.querySelector('.className').style.propertyName = value to change CSS properties.
+
