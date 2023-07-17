@@ -15,3 +15,7 @@
     classList.add('class-name') to add a class.
     classList.contains('class-name') to check if a class is visible.
 
+3. Use document.getElementById('id-name') is another way to select element by id.
+    Use document.querySelector('.className).src = 'ImageFile' to set image dynamically.
+    Use document.querySelector('.className).toggle('class-name') to add the class if its not present or remove
+    th class if its present.
