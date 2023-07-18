@@ -1,0 +1,152 @@
+1. Document Object Model:
+    Structured Representation of HTML Documents. Allows Javascript to access HTML elements and styles to manipulate them.
+    DOM Tree's root node is document. Then the child node is HTML and inside it rest of the tags. DOM is not a part of 
+    Javascript. DOM Methods and properties are part of Web API's and Javascript can interact with them. 
+
+    Use document.querySelector('.className') to select the element which has the class as className.
+    document.querySelector('.className').textContent for text elements and document.querySelector('.className').value 
+    for input elements.
+    document.querySelector('.className').addEventListener('click', () => {}) to process click events.
+    document.querySelector('.className').style.propertyName = value to change CSS properties.
+
+2. Use document.querySelectorAll('.className') to select multiple elements with the same class name.
+    To remove a css style, document.querySelector('.element').classList.remove('class-name')
+    document.querySelector('.className').addEventListener('keydown', function(e){}) to register a keydown event.
+    classList.add('class-name') to add a class.
+    classList.contains('class-name') to check if a classList contains the class.
+
+3. Use document.getElementById('id-name') is another way to select element by id.
+    Use document.querySelector('.className).src = 'ImageFile' to set image dynamically.
+    Use document.querySelector('.className).toggle('class-name') to add the class if its not present or remove
+    th class if its present.
+
+4.
+    1. High Level : Memory does not need to be managed explicitly like a low level language like C which makes 
+        development easier but the downside is that the programs will run slower.
+
+    2. Garbage Collection : Automatically deletes unused objects to free up memory.
+
+    3. Interpreted or Just In Time : Converting high level code to machine code.
+
+    4. Mulit-paradigm : An approach and mindset of structuring code. 
+                        1. Procedural Programming
+                        2. Object Oriented Programming
+                        3. Functional Programming
+
+    5. Prototype based, object-oriented : Create arrays from array blueprint which is called a prototype and the array
+                                            inherits all the methods.
+
+    6. First-class functions : Functions are simply treated as variables. We can pass them into other functions and 
+                                return from functions.
+    
+    7. Dynamic : Dynamically typed. No data type definition. Type of variables can be rearranged inside code.
+
+    8. Single Threaded : Can only handle one task at a time.
+
+    9. Non blocking event loop : Takes a long running task, executes them in "background", and puts them back in the
+                                main thread once they are done.
+
+5. 
+    JS Engine : Program that executes Javascript Code. Any Javascript engine consists to two parts. One is call stack
+                and the other is heap. Call stack is where our code is executed using execution context. Heap is 
+                unstructured memory pool which contains all the objects.
+
+    Compilation : In compilation entire source code converted to machine code at once and written to binary file 
+                    which can be executed by a computer.
+
+    Interpretation : Interpreter runs through the source code and executes it line by line.
+
+    Interpreted languages are slower than compiled languages.
+
+    Modern Javascript uses a combination of Compilation and Interpretation which is called JIT(Just In Time compilation)
+    Entire code is converted to machine code at once and then executed immediately.
+    Code is parsed into something called AST(Abstract Syntax Tree) which is then compiled into machine code using JIT
+    compilation which is then executed immediately. During execution, unexecuted code is being optimized and then being
+    recompiled which makes modern browsers so fast.
+
+    Javascript Runtime : Javascript Runtime is a container which contains all the parts required to run javascript.
+    These parts are:
+    1. Javascript Engine which has call stack and heap memory,
+    2. WEB API's for DOM, fetch API's, timers etc.
+    3. Callback Queue which contains all the callback functions, eg: If we create addEventListener which has another
+    callback functions inside of it, it will go in the callback queue and will be given to call stack when the stack
+    is empty. This process of transferring functions from callback queue to call stack is called event loop and is
+    essential for non blocking concurrency model.
+    
+    Node.js runtime has no web api's because it is used for backend development but has something additional instead
+    like c++ bindings and thread pool.
+
+6. During execution, global execution context is created which is for all the code which is not inside any function.
+    Execution context is an environment where a piece of javascript code is executed. It stores all the necessary 
+    information for the code to be executed like variables etc. After the global execution context has finished 
+    executing, new execution contexts are created, one for each function.
+
+    There are 3 things inside execution context:
+    1. Variable environment which has let, const and var declarations, functions and arguments object.
+    2. Scope chain, which keeps references to the variables which are outside the function declaration.
+    3. this keyword.
+
+    Arguments object and this keyword do not exist for execution contexts of arrow functions.
+
+    Call stack is a place where execution contexts are stacked on top of each other which keeps track of where we are
+    currently in the program's execution.
+
+7. 3 different types of scope:
+    1. Global Scope : Outside of any function or block. Variables declared in global scope are accessible everywhere.
+    2. Function Scope : Variables are accessible only inside function, not outside. Also called local scope.
+    3. Block Scope : If statement, for loop etc. Variables declared inside the block are only accessible inside the
+    block. Only let and const are accessible just inside the block. var will still be accessible outside the block.
+    Functions are also block scoped after ES6.
+
+    let, const : Block Scoped
+    var : function scoped, not block scoped
+    function : block scoped
+
+    Scope can only lookup in scope chain, it cannot look down.
+
+8. The code inside a function is only executed once it is invoked. So all the variables which have been decalred till
+    the function invocation in the global scope will be accessible in the function body.
+
+    Hoisting makes some types of variables accessible/usable in the code before they are actually declared. Variables
+    lifted to the top of their scope.
+
+    1. function declaration is hoisted, functions gets executed as defined in the code.
+    2. var is also hoisted but the initial value is undefined.
+    3. let and const are not hoisted. They are in temporal dead zone.
+    4. function expressions and arrow functions are hoisted or not depends upon whether var, let or const is used.
+    If var is used it will be an undefined value. If const is used it will give undeclared error.
+
+    Temporal dead zone is the region of code where variable cannot be accessed. Eg. If we try to access a const variable
+    before its declaration, it will give a reference error. So that region is temporal dead zone.
+
+    Variables created with var will create a property on the global window object.
+
+9. this keyword is a special variable that is created for every execution context (every function). Takes the value of
+    (points to) the owner of the function in which this keyword is used. This is not static. It depends on how the function
+    is called, and its value is only assigned when the function is actually called.
+
+    Method, this points to object calling the method.
+    Simple function call, this = undefined.
+    Arrow Functons : this = this of the surrounding function. (Arrow functions do not have their own this keyword)
+    Event Listener : Points to DOM element that the handler is attached to.
+
+    This does NOT point to the function itself, and this does NOT point to its variable environment.
+
+    Using the this keyword in global scope will point to window object.
+    Using the this keyword inside a function will point to undefined.
+    Using the this keyowrd inside an arrow function will point to nearest parent's scope this keyword.
+    Using the this keyowrd inside a function in an object will print the object which calls the method.
+
+    Method borrowing, copying the method from one object to another.
+    matilda.calcAge = jonas.calcAge
+
+    arguments keyword will have information about the arguments. Arguments keyword will be available only for regular 
+    functions and not for arrow functions.
+
+10. 
+    const obj1 = {name : 'Taavish', age : 27};
+    const obj2 = obj1;
+    If we change obj2.age = 30, these changes will also be reflected in obj1. The reason for this is that both variables
+    point to the same object in heap memory. Essesntially we are creating a shallow copy.
+    Use Object.assign({}, obj1) to actually copy the object however Object.assign only works on the first level.
+    It too creates a shallow copy. If there are nested objects then it will not work on them.
