@@ -1,0 +1,211 @@
+1.  Destructuring arrays
+        const [x,y,z] = [1,2,3];
+    Destructring an array does not affect the original array.
+
+    const [x,,y] = [1,2,3] to select first and the third element.
+
+    let [a,b] = [1,2]
+    [a,b] = [b,a] (Swapping using destructuring)
+
+    const arr = [1,2,[5,6]];
+    const [i,,[j,k]] = arr; (Destructuring inside destructuring to access nested array)
+
+    const [i=1,j=1,k=1] = [8,4] (Assigning default values to variables, so if we access some data that isn't present, we get default value instead)
+
+2. Destructuring objects
+    const obj = {
+        a : 'hello',
+        b : 'world',
+        c : ['javascript', 'c++', 'python'],
+        d : {
+            e : 'More',
+            f : 'Data'
+        }
+    };
+
+    const {a, b, c} = obj; (This is how we will destructure this object)
+
+    const {a : str1, b : str2, c : languages} = obj (This is we can change the variable names for the properties of destructured object)
+
+    const { a : str1 = 'Yo', b : str2 = "What's Up" } = obj (Change variable names and assign default values)
+
+    const { d : {e, f} } = obj; (Destructring nested objects)
+
+    function formSentence({a, b, c, d}) {
+        console.log(`${a}, ${b}, ${c}, ${d}`);
+    }
+    formSentence(obj);
+    Using this syntax you can destructure an object in the arguments
+
+3. Spread Operator
+    const arr = [1,2,3];
+    const newArr = [1,2,...arr]; Spread Operator
+    Spread operator takes out all the elements from the array and does not create new variables unlike destructuring.
+    Spread operator works on all iterables like strings, maps and sets. Object is not an iterable.
+    Spread operator is only used when building a new array or passing arguments inside a function.
+
+    function orderPasta(a, b, c) {
+        console.log(a,b,c);
+    }
+    const ingridients = [a,b,c];
+    orderPasta(...ingridients); Using rest operator to pass arguments inside a function
+
+    Starting ES2018 spread operator can be used for objects to
+    So obj2 = {...obj1}; This is how you can copy contents of obj1 to obj2. This will create a shallow copy so the first level 
+    data can be manipulated in both objects without affecting each other.
+
+4. Rest Pattern
+    Rest is opposite of spread. While spread unpacks an array, rest packs individual elements in an array.
+    const [a, b, ...others] = [1,2,3,4,5]; others will contain [3,4,5].
+    Rest Pattern must always be the last in the destructuring assignment because otherwise javascript will not be able
+    to figure out how many elements to assign to rest assignment. Similaryly there can only be one rest assignment on the
+    left hand side.
+
+    Rest Pattern can also be used for objects
+    const days = {
+        thu : {},
+        fri : {},
+        sat : {}
+    }
+
+    const {sat, ...weekdays} = days;
+    weekdays will contain thu and fri objects.
+
+    function add(...args) {
+        //args will be an array
+        let sum = 0;
+        for(let i=0; i<arr.length; i++) {
+            sum += args[i];
+        }
+        return sum;
+    }
+
+    add(1,2,3,4,5)
+
+    function add(x, ...roe) {
+        x = 1
+        roe = [2,3,4]
+    }
+
+    add(1, 2, 3, 4) 
+
+5. Short Circuting
+    OR operator
+    Logical Operators can use any data type, they can return any data type and they can do short-circuting.
+    console.log(3 || 'Jonas') will print 3 because the first value is truthy. If the first value is truthy other
+    values will not even be evaluated.
+    If no value is truthy then the last value will be returned.
+
+    AND operator
+    AND operator returns the first value which is falsy.
+    If all values are truthy, it returns the last truthy value.
+
+6. Nullish Coalescing Operator:
+    Nullish Coalescing operator works with nullish values which are null and undefined (Not 0, '' and NaN)
+    restaurant.numGuests = 0;
+    const guests = restaurant.numGuests || 10;
+    console.log(guests);
+    This will assign the value 10 to guests which is incorrect.
+
+    Instead we should use NCO to fix this bug:
+    const guests = restaurant.numGuests ?? 10;
+
+7. Logical Assignment Operators:
+    let a = 10;
+    a ||= 0;
+    a &&= 10;
+    a ??= 0;
+
+8. For-Of Loop
+    const languages = ['c++', 'python', 'javascript'];
+    for(let lang of languages) {
+        console.log(lang)
+    }
+    We can use continue and break keywords in for-of loop.
+
+    for(let [i, lang] of languages.entries()) {
+        console.log(`${i} : ${lang}`);
+    }
+    This is an example of for of loop modified to print indexes.
+
+9. Enhanced Object Literal:
+    const weekdays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+    const obj = {
+        thu : {},
+        fri : {},
+        [weekdays[5]] : {}
+    }
+    Object keys could be computed using an expression inside sqare brackets.
+
+10. restaurant.openingHours?.mon?.open
+    This statement is checking whether openingHours and mon exist. One before ?.
+
+11. Looping Objects
+    Object.keys(obj) returns keys of an object inside an array.
+    Object.values(obj) returns values of an object inside an array.
+    Object.entries return [key, value] pairs in an array inside a global array.
+
+12. Sets    
+    Set cannot have duplicates values.
+    const ordersSet = new Set(['Pasta', 'Pizza', 'Pizza', 'Risotto'])
+    Order of elements inside a set is irrelevant. You can pass in any iterable in set.
+    const size = ordersSet.size;
+    const hasPizza = ordersSet.has('Pizza'); Check if set includes an element
+    ordersSet.add('Garlic Bread'); //Add an eloement inside a set
+    orderSet.delete('Pizza'); //Delete Pizza from set
+
+    Use for-of loop to traverse a set.
+    Spread operator can be used to spread set to convert it to an array.
+
+13. Maps
+    In objects the keys are always strings, but in maps keys can be of any type.
+    const rest = new Map();
+    rest.set('name', 'Classico Italiano'); set method returns the updated map.
+    rest.get('name'); Returns value corresponding to the key
+    rest.has('key_name'); Checks if the map contains the key, key-name
+    rest.delete(2); Deletes a key from the map
+    rest.size Returns the size of the map
+    rest.clear() Clears the map
+
+    const question = new Map([
+        ['hello', 'Hello'],
+        [1, 'Nope'],
+        [2, 'Hey']
+    ]);
+
+    Use Array of arrays to initialize a map like this.
+
+    To easily convert an Object to map do the following:
+    const obj = {
+        'thu' : {'open' : 10, 'close' : 22},
+        'fri' : {'open' : 10, 'close' : 20},
+        'sat' : {'open' : 14, 'close' : 20}
+    };
+
+    const map = new Map(Object.entries(obj));
+    This is because Object.entries returns an array of arrays where smaller arrays have object key as first element and
+    object value as the second element which is exactly the syntax that can be fed to a map initializer (See above in question map)
+
+    We can use spread operator to unpack a map into array of arrays
+    We can use ...map.keys() to get all the keys of a map
+    We can use ...map.values() to get all values of a map
+    We can use ...map.entries() to get all key-value pairs of a map
+
+    Use arrays when we need order and our data can contain duplicate values or we need to manipulate data.
+    Sets should be used when working with unique element elements and high performance is required.
+    Objects are traditional key, value data structures
+    Maps can have any key data type and are a lot faster than objects.
+
+14. Strings
+    const str = 'Airliner';
+    console.log(str.indexOf('r')); Search a character
+    console.log(str.lastIndexOf('r')); Search last index of character
+    console.log(str.indexOf('line')); Search index of substring
+
+    str.slice(2); Entrire string starting from index 2
+    string.slice(0, 3); Substring from 0 to 3 excluding 3
+
+    String is a primitive in javascript but it has methods, its because when we call a method on the string it is 
+    converted to an object, and when the method executes the object is converted back to string.
+
+    const str = new String('abc'); This is an object
