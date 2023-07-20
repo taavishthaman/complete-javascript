@@ -209,3 +209,29 @@
     converted to an object, and when the method executes the object is converted back to string.
 
     const str = new String('abc'); This is an object
+
+    str.toUpperCase(); Converts string to upper case
+
+    str.toLowerCase(); Converts string to lower case
+
+    str.trim(); Trims extra space in the email
+
+    str.replace('%', '$') Replaces % with $ inside string.
+
+    str.replaceAll('%', '$') Replaces % with $ at all places.
+
+    str.include('substr') Checks if a string includes a substring.
+
+    str.startsWith('substr') Checks if a string starts with substring.
+
+    str.endsWith('substr') Checks if a string ends with substring.
+
+    str.split('/') Splits a string with arguments as the breakpoint and returns an array.
+
+    [str1, str2, str3].join(' ') Join strings inside an array with joining string as argument.
+
+    str.padStart(25, '+') Final length of string will be 25 after padding from start.
+
+    str.padEnd(25, '+') Pad string on end.
+
+    str.repeat(5) Repeat a string 5 times
