@@ -1,0 +1,259 @@
+Closer Look at Functions
+
+1. Default Parameters
+    function add(a=10, b=20) {
+        return a + b;
+    }
+
+    Use = to specify the default value
+
+    function(a=10, b=20, c=a+b) {
+        return a + b + c;
+    }
+
+    A parameter's value may contain previously declared parameters
+
+2. Primitive types are passed to function by value, objects are passed to function by reference.
+    Javascript has no pass by refernce. Objects seem to change because we pass reference to an object to a function which 
+    is again a value but its not actual pass by reference.
+
+    First Class Functions : Javascript treats functions as first-class citizens. This means that functions are simply 
+    values. Functionas are just another type of obejct.
+
+    Higher Order Functions : Functions which recieve another function as an argument or functions which return a function
+    are called higher order function.
+    
+    Higher order functions are used to create abstractions.
+
+3. Function returning functions
+
+    function greet(greeting) {
+        return function(name) {
+            console.log(`${greeting} ${name}`)
+        }
+    }
+
+    greet('Hey')('Jonas');
+
+4. Call, Apply and Bind methods are used to deal with the this keyword inside functions.
+
+    Call Method
+
+    function add(x, y) {
+        return this.a + this.b;
+    }
+
+    add() alone will not work as this will be undefined
+
+    Instead we can use the call method
+    const obj = {
+        a : 10,
+        b : 20
+    } 
+
+    add.call(obj,x,y);
+    The first argument in the call method is what the this keyword points to. So this.a will be 10 and this.b will be 20
+    The rest of the arguments inside the call method will be the arguments of the function.
+
+
+    Apply Method
+    Apply method does the same thing as the call method but it takes in an array after passing in the first argument as
+    the arguments for the function that is to be called.
+
+    add.apply(obj, [x,y]);
+    add.call(obj, ...[x,y]);
+
+
+    Bind Method
+    Bind Method does not immediately call the function instead it returns a new function to which this keyword is bound
+    to.
+
+    const addObj = add.bind(obj);
+    addObj(x,y);
+
+    Bind Method can also be called with one or more arguments already set.
+    const addObj = add.bind(obj, 10);
+    addObj(20);
+
+    This kind of pattern where the part of the original function is already defined is called partial application.
+
+    In an event handler function, the this keyword is always attached to the dom element. Bind method can be used to 
+    change that.
+
+5. Immediately Invoked Function Expressions (IIFE)
+    Function that executes only once and then never again. Used for async await.
+
+    (function() {
+        console.log('This will execute only once');
+    })()
+
+    (() => console.log('This will also run only once!))();
+
+
+6. Closures
+
+    Simple secret behind closure is that every function has the access to the variable environemnt of the execution context 
+    in which it was created even if the execution context does not exist in the call stack.
+
+    Closure : Variable Environment attached to the function, exactly as it was at the time and place the function was
+    created.
+
+    const secureBooking = function() {
+        let numPassengers = 0;
+
+        return function() {
+            this.numPassengers++;
+            console.log(`Num Passengers ${numPassengers}`);
+        }
+    }
+
+    const booker = secureBooking();
+    booker(); //numPassengers = 1
+    booker(); //numPassengers = 2
+    booker(); //numPassengers = 3
+
+    Scope chain is preseved in the closure even though the execution context is destroyed. Variable Environment is 
+    preserved even though its execution context is no longer present in the call stack. 
+
+    Thanks to the closure, the function does not lose connection to the variables that were creted in its birthplace.
+
+    A closure is the closed over variable environment of the execution context in which a function was created, even after 
+    that execution context is gone.
+
+    Closures are created automatically by javascript.
+
+
+Arrays
+
+1. Methods are functions that we can call on objects. Slice method does not change the original array but the splice method
+    changes the original array.
+
+    arr.slice(-1) Returns the last element of the array
+    arr.splice(-1) Returns the last element of the array and the original array only has n-1 elements left now.
+
+    arr.slice(2,4); Returns the elements of array starting at index 2 upto index 3
+    arr.splice(2,4); Returns the elements of array starting at index 2 and 2+4 units of length.
+
+    arr.reverse() Reverses the array and mutates the original array.
+
+    const concatArr = arr.concat(arr2); Concatenates both arrays and does not mutate original array
+    arr.join(' - ') Joins an array to form a string separated by delimter
+
+2. At Method
+    const arr = [1,2,3,4,5];
+    arr[0] is equal to arr.at(0)
+    arr[arr.length-1] is equal to arr.slice(-1)[0] which is equal to arr.at(-1)
+    at() method works with negative indices.
+    at() method also works with strings.
+
+3. For Each Loop
+    For Each loop is a higher order function which takes in current element as a parameter
+    arr.forEach(function(ele) {
+        console.log(ele);
+    })
+
+    A callback function is used to tell another higher order function what it should do.
+
+    arr.forEach(function(ele, idx, arr) {
+        ele -> current element
+        idx -> current index
+        arr -> Array
+    })
+
+    continue and break statements DO NOT work in for each loop. So don't use if break and continue are required.
+
+    For Each Loop also works on maps and sets
+    map.forEach(function(value, key, map) {
+        value -> Value 
+        key -> key
+        map -> The entire map 
+    })
+
+    set.forEach(function(value, _, set){
+        value -> value 
+        _ -> key which is the same as value since sets don't have a concept of key
+        set -> The entire set
+    })
+
+
+4.  const container = document.querySelector('.cont');
+    container.insertAdjacentHtml('afterbegin', 'htmlText'); This is used to insert html string
+    container.innerHtml is the html string of an element.
+    container.innerText is only the text content of an element.
+
+5. Map Method
+    Maps the values of the original array to a new array. Returns a new array.
+    Map, Filter, Reduce is more of a functional programming paradigm becuase it uses a callback function.
+
+6. Filter Method
+    Filter returns a new array containing the array elements that passed a specific test condition.
+    Filter method is only supposed to return a conditional or a boolean value. Filter creates a new array.
+
+7. Reduce Method
+    Reduce (reduces) or boils down all elements of an array to a single value.
+    First parameter is accumulator, accumulator is like a snowball.
+    arr.reduce((acc, num, i, arr) => {
+        return acc + num;
+    }, 100)
+
+    The second parameter to the reduce method (100) is the initial value of the accumulator. Default value is 0.
+
+    Reduce can be used to sum up the array or find the maximum value in the array and a lot of other things.
+
+    All these methods can be chained together. We should try to reduce chaining as much as possible for large arrays 
+    as it will lead to performance issues.
+
+8. Find Method
+    Retrieve one element of an array based on a condition. Returns the first element of the array which satisfies
+    a certain condition.
+
+9. In HTML, the default behaviour is for the page to reload if the form submit button is pressed.
+    Use event.preventDefault() method to prevent the form from submitting and reloading the page.
+
+20. Find Index Method
+    acc.findIndex(acc => acc.username === currentAccount.username) returns the index of the element in an array which meets
+    a certain criteria.
+
+21. Some and Every (Return type is boolean for both)
+    movements.some(mov => mov > 0); Returns true or false if a condition is true. 
+    If we hear the word any, its a good usecase for the some method.
+
+    Every method returns true if every element inside the array passes a certain condition.
+
+22. Flat and Flatmap
+    const arr = [[1,2,3],[4,5,6],7,8];
+    arr.flat() will flatten this entire array into one array. Flat works for only one level of nesting
+
+    flat() method takes in a depth argument which specifies how deep the array should be flattened.
+
+    flatmap() method combines both map and flat method. flatmap was introduced because map and flat method used one 
+    after the other is quite a common operation and flatmap combines both and improves performance.
+
+23. Sorting Arrays
+    arr.sort() to sort an array of strings not numbers.
+    sort() function mutates the original array.
+
+    arr.sort((a, b) => {
+        if(a > b) {
+            return 1;
+        } else {
+            return -1;
+        }
+    })
+
+    Return a positive value if the order needs to be switched up and negative if the order needs to remain the same.
+    Hence the sort function with comparator described above will sort the array in ascending order.
+
+    arr.sort((a, b) => a-b); will return a sorted array in ascending order
+    arr.sort((a, b) => a-b); will return a sorted array in descending order
+
+24. Creating Arrays
+    const arr = Arrays(7); Creates an array with 7 empty spaces
+    arr.fill(10); Fill the array with number 10
+    arr.fill(10, 3, 5) Fill the array with 10 starting from 3rd index and ending till 5th index with 5 not included.
+
+    A better method is
+    const arr = Array.from({length : 7}, (num, i) => i+1); Returns an array filled from 1 to 7.
+    Array.from() can also convert an iterable to an array.
+
+    Reduce method is like the swiss knife of all array methods and can be used for everything.
