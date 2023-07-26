@@ -257,3 +257,103 @@ Arrays
     Array.from() can also convert an iterable to an array.
 
     Reduce method is like the swiss knife of all array methods and can be used for everything.
+
+
+NUMBERS
+
+1. Convert string to number console.log(+'23'). 
+    Parsing
+    Number.parseInt('20px') ignores the characters and converts the text to 
+    number. Number.parseFloat('2.5rem') converts string to 2.5 in float. 
+    You can also pass a second argument to the parseInt() function which is the base of the number called the radix.
+    Number.parseInt(1001001, 2) will give binary number's output to integer.
+
+    Number.isNaN(+'20X') true Is not a number
+    Number.isFinite(1/0) false is a Finite number, better suited to check if number 
+
+2. Math.sqrt(25) Calculates square root
+    25 ** (1/2) Caluclates square root
+    25 ** (1/3) Calculates cubic root
+    Math.max(10,20,30,'40') Returns the max element and can do type coercion
+    Math.min(10,20,30,40) Returns the min element
+    Math.PI to get value of PI
+
+    Math.floor(Math.random() * (max-min) + 1) + min; Generates a random number between min and max.
+
+    Math.round(x) Rounds the number
+    Math.ceil(23.1) Brings the number to ceiling. Does type coercion implicitly.
+    Math.floor(23.7) Brings the number to floor. Does type coercion implicitly.
+    +(23.5).toFixed(2) Converts number to two decimal places 
+
+    You can add numeric separators to a number
+    const num = 283_567_345_000
+    Underscores can be placed anywhere.
+    Numeric separators will not work if we try to convert string with underscores to a number
+    Number('234_566_000') will give NaN value.
+
+3. Big Integers
+    2 ** 53 - 1 is the biggest number that you can safely represent in javascript.
+    It is inbuilt in Number object as Number.MAX_SAFE_INTEGER.
+    Add n to the end of the number and it will be converted to BigInt.
+    BigInt and Number cannot be mixed while performing operations. Although Comparison still works. (20n > 15)
+    Math methods do not work on BigInt Math.pow()
+    Division of BigInts will return the nearest BigInt and not the floating point.
+
+4. Dates
+    Months in javascript are 0 based.
+    Unix Time is Jan 01, 1970 which is the beginning of time in javascript.
+    new Date(10000) 10 seconds after Unix Time. This kind of date works in milliseconds.
+
+    const date = new Date(2037, 10, 19);
+    date.getFullYear(); Returns the full year
+    date.getMonth(); Returns the month
+    date.getDate(); Returns the date
+    date.getDay(); Retuns the day of the week.
+    date.getHours(); Returns the hour
+    date.getMinutes(); Returns the minutes
+    date.getSeconds(); Returns the seconds
+    date.toISOString(); ISO Date
+    Date.now() give you the current timestamp.
+
+    Date can be converted to its timestamp value by converting it to a number.
+    const date = new Date();
+    const timestamp = +date;
+
+    Intl.DateTimeFormat('en-US').format(now) is used for internationalizing dates according to en-US format here.
+    Its a really good idea to use this instead of extracting date, month and year separately.
+    Use options object to further configure Intl string
+
+    const options = {
+        day : 'numeric',
+        month : 'long',
+        year : 'numeric',
+        hour : 'numeric',
+        minute : 'numeric'
+    };
+
+    Intl.DateTimeFormat('en-US', options).format(new Date());
+    Use navigator.language to get locale.
+
+    To internationalize numbers do something similar, you can also create options object
+
+    Intl.NumberFormat('en-US').format(new Date());
+
+5. Timeouts and Intervals
+
+    setTimeout(() => {
+        console.log('Hello')
+    }, 3000);
+
+    Callback function is called after 3 seconds.
+
+    We can also call setTimeout with arguments. Arguments can be specified after time in milliseconds.
+
+    setTimeout((arg1, arg2) => {
+        console.log(agr1, arg2)
+    }, 3000, 'Hello', 'World')
+
+    Timeout function can be cleared using clearTimeout(id) function. Juts pass in id to this function.
+
+    setInterval(() => {
+        console.log('Log after every second')
+    }, 1000)
