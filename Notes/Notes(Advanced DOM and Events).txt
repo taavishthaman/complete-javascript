@@ -1,0 +1,112 @@
+Advanced DOM and Events
+
+1. DOM tree is generated from an HTML document which we can interact with. DOM is very complex API that contains
+    a lot of methods and properties to interact with the DOM tree.
+
+    Use document.documentElement to select the entire page. Similarly use doucument.head and document.body
+    to select head and body tags.
+
+    There are a few methods for selecting elements
+    1. document.querySelector('.className') or document.querySelector('#idName')
+    2. document.querySelectorAll('.className')
+    3. document.getElementById('idName')
+    4. document.getElementsByClassName('className')
+    5. document.getElementsByTagName('tagName')
+
+    Create Element 
+    const message = document.createElement('div'); Creates a div and stores it inside message.
+    This element can only exist in dom at one place.
+
+    Attach element wrt another element
+    header.prepend(message)
+    header.append(message)
+    header.addAjacentHTML('afterbegin', message);
+
+    Delete Element
+    message.remove();
+
+2. To add a style to an element do:
+    element.style.backgroundColor = 'orangered';
+    element.style.fontSize = '14px';
+    
+    To read attributes like src or alt from an image do:
+    const imgElement = docuement.querySelector('.src');
+    console.log(imgElement.src);
+    console.log(imgElement.alt);
+
+    We can also change the attributes like this:
+    imgElement.alt = "New alt text!";
+
+    To set and get non standard attributes 
+    imgElement.setAttribute('company', 'bankist');
+    console.log(imgElement.getAttribute('company'));
+
+    Work with the classes using these methods
+
+    logo.classList.add('c', 'j');
+    logo.classList.remove('c', 'j');
+    logo.classList.contains('c');
+    logo.classList.toggle('c');
+
+3. Use element.getBoundingClientRect() to get the coordinates of the target element.
+
+    To scroll to a certain element in the DOM simply do
+    section1.scrollIntoView({behvaiour : 'smooth'});
+    which is the modern solution.
+
+4. An event is a signal trigerred by a DOM node. 
+    const callback = () => {}
+    h1.addEventListener('click', () => callback)
+    This function is used to add an event listener.
+
+    h1.removeEventListener('click', () => callback)
+    This function is used to remove event listener. However the callback function must be the same one that was
+    used during add.
+
+    Event propagation in javascript
+    1. Capturing Phase : The event is not generated at the target element but instead is generated at the root
+    of the DOM tree which is the document. The event travels down from the root to the source where it was
+    originated. This is the capturing phase.
+
+    2. Target Phase : The event reaches the target element where the event occured and the callback function
+    executes.
+
+    3. Bubbling Phase : The event bubbles up to the root of the DOM tree back to the document.
+
+    Some elements only have the target phase. They don't have capturing or bubbling phase but they are rare.
+
+    e.target is the element where the event originated.
+    e.currentTarget is the element to which the event listener is attached to which is same as this keyword. 
+    e.stopPropagation() is used to stop upwards propagation.
+
+    Set the third parameter to true in addEventListener inorder to detect events in capturing phase.
+
+5. Event Delegation is the way of optimising addition of the event listeners to inidividual elements by adding 
+    the listener to a common parent element. When the event bubbles up, we can check which element originated
+    the event.
+
+6. querySelector() and querySelectorAll() can work on both document and other elements too. If these functions
+    are called on an element they would select all descendants of that element with the particular attribute.
+    Use el.childNodes to get all nodes of all types for the el.
+    Use el.children to get only element children
+    Use el.firstElementChild to get the first child element and el.lastElementChild to get the last child element 
+    inside the children list.
+
+    Use el.parentNode and el.parentElement to get the parent node or parent element for the el.
+    Use el.closest('.header') Find the closest parent of el with header class
+
+    Javascript allows you to only select direct next and direct previous sibling
+    el.nextElementSibling and el.previousElementSibling to select next or previous element.
+    el.parentElement.children to select all children element.
+
+7. mouseenter does not bubble up but mouseover does.
+    Scroll event is not very efficient since it fires everytime user scrolls.
+    Use intersection observer to implement sticky header or reveal new sections of website when they are
+    scrolled into view.
+
+    Lazy Loading:
+    Lazy Loading is a technique used with images where a lower resolution version of the image is displayed
+    but when the image is brought into view then the higher resolution version is loaded.
+
+    Use defer keyword when adding script tag inside HTML because it makes sure everything gets executed in order.
+    
