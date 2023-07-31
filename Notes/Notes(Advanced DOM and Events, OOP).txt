@@ -110,3 +110,98 @@ Advanced DOM and Events
 
     Use defer keyword when adding script tag inside HTML because it makes sure everything gets executed in order.
     
+
+Object Oriented Programming
+
+1. All objects created from a class are called instances of that class.
+    4 pillars of OOP
+
+    1. Abstraction : Ignoring or hiding details that don't matter, allowing us to get an overview of the 
+    perspective of the thing we're implementing, instead of messing with the details that don't really matter
+    to our implementation.
+
+    2. Encapsulation: Keeping some methods or properties private inside the class so that they are not
+    accessible outside of class. Some methods can be exposed as a public interface.
+
+    3. Inheritance : Making all the properties and methods of a certain class available to a child class,
+    forming a heirarchichal relationship between classes. This allows us to reuse common logic and to model
+    real world relationships.
+
+    4. Polymorphism : A child class can overwrite the methods inherited from its parent class.
+
+2. Constructor Functions
+    The first and the original techinque to create an object which displays OOP like properties in javascript
+    is the constructor function
+
+    const Person = function(firstName, birthYear) {
+        this.firstName = firstName,
+        this.birthYear = birthYear
+    };
+
+    const jonas = new Person('Jonas', 1991);
+
+    Person.prototype.calcAge = function() {
+        return 2037 - this.birthYear;
+    }
+
+    Add new methods to the prototype instead of adding them directly inside constructor function as it will
+    be more efficient.
+
+    If a method is not found directly inside the object, javascript will then look inside the object's 
+    prototype and keep moving up the prototype chain until its found. This is protype inheritance or delegation.
+
+3. ES6 Classes
+    class Person {
+        constructor(firstName, birthYear) {
+            this.firstName = firstName;
+            this.birthYear = birthYear;
+        }
+
+        calcAge() {
+            console.log(2037-this.birthYear);
+        }
+
+        greet() {
+            console.log(`Hey! ${this.firstName}`)
+        }
+    }
+
+    const jonas = new Person('Jonas', 1991);
+
+    Method can also be attached to the class prototype just like constructor functions
+
+    Person.protype.socialSecurity = function(num) {
+        this.socialSecurity = num;
+    }
+
+    Classes are first class citizens. They can be passed in function arguments and functions can return them.
+
+    static methods work on the class itself and not on instances. 
+    Example : Array.from() or Number.parseInt() are all static methods.
+
+    class Person {
+        constructor(firstName, birthYear) {
+            this.firstName = firstName;
+            this.birthYear = birthYear;
+        }
+
+        static hey() {
+            console.log('Hey There!');
+        }
+    }
+
+4. Object.create()
+
+    const PersonProto = {
+        calcAge() {
+            console.log(2037 - this.birthYear);
+        }
+    }
+
+    const sarah = Object.create(PersonProto);
+    sarah.birthYear = 2002;
+
+5. Encapsulation
+    Private and protected fields do not exist in javascript, use _ underscore to emulate protected.
+    Use # in front of property to make it private.
+
