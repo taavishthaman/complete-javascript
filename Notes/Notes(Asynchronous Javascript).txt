@@ -1,0 +1,102 @@
+1. Promises
+    A promise is an object that is used as a placeholder for the future result of an asynchronous operation.
+    A container for asynchronously delivered value.
+    A container for a future value.
+
+    Promise Lifecycle
+
+    First the promise is in pending state
+    Later the promise is in settled state with two possible outcomes. Fulfilled or Rejected.
+
+    First we build a promise, then we consume a promise.
+
+    How to use Fetch
+
+    Fetch returns a promise whose value can be accessed by using a then method. The response can be converted to
+    json by using response.json() which also returns a promise whose value can be accessed by chaining another then
+    method.
+
+    fetch(url).then(response => {
+        return response.json();
+    }).then(data => {
+        console.log(data);
+    })
+
+    Promises resolve callback hell. Keep returning promises from each then method and chain that then method to 
+    another then method otherwise we create a callback hell again.
+
+    Use a catch method to catch any error that occured in the then chain.
+    Use finally at the end of the then chain to execute a block of code.
+    Use throw new Error() anywhere inside the code to throw an error which then immediately reject the promise and 
+    takes the flow of then chain to the error block.
+
+2. Event Loop
+    Javascript has only one thread of execution.
+    The event loop puts callbacks from the queue into the call stack whenever the call stack is empty.
+    Event loop Tick : Every time the call stack takes a callback function from the callback queue, its called the
+    event loop tick.
+
+    Web API's and the callback queue work together to make sure that the tasks are executed in non blocking manner
+    asynchronous manner. 
+    Apart from callback queue there is also a microtask queue which works for the callback function related to promises.
+    The microtask queue has a higher priority of execution than callback queue.
+
+    Promises have a higher priority of execution than timeout functions so if a promise is executing a heavy task, the timeout
+    function will display its results after a while. So timeout functions should not be used for precision based tasks.
+
+3. Promises
+    Syntax
+
+    const res = new Promise(function(resolve, reject) {
+        const num = Math.random();
+
+        if(num >= 0.5) {
+            resolve('You Won!')
+        } else {
+            reject(throw new Error('You lost!'))
+        }
+    });
+
+    Promisifying : Convert callback based asynchronous functions to a promise based function.
+
+    fetch() returns the resolved value of a promise which can be dealt with either using then() method or async/await.
+
+    async/await is a lot more elegant than then() but its just syntactic sugar over the then method. Behind the scenes 
+    it still uses promises.
+
+    Just like .catch() method is used to do error handling in then() method. Use try catch to handle errors in async/await.
+
+    Never ignore error handling especially when dealing with asynchronous logic.
+
+    An async function always returns a promise.
+
+    Since async/await cannot be used in global scope, we can use IIFE (Immediately Invoked Function Expression) to 
+    deal with asynchronous function inside the global scope.
+
+    const getData = async function() {
+        return data;
+    }
+
+    (async function() {
+        try {
+            const data = await getData();
+        } catch(err) {
+            console.log('Some error occured');
+        } finally {
+            console.log('Executed in the end!');
+        }
+    })();
+
+    const data = Promise.all([fetch(url1), fetch(url2), fetch(url3)]);
+
+    Use Promse.all() when you need to run fetch on multiple urls and they don't depend upon each other. They will all 
+    run in parallel and will give much better speed compared to fetching data from urls one at a time.
+
+3. Promise combinators
+    Promise.race() will take in an array of promises and return the first one which settled(either resolved or rejected)
+
+    Promise.allSettled() returns all the results of all the promises.
+    The difference between Promise.all and Promise.allSettled is that Promise.all short circuits as soon as one
+    promise rejects but Promise.allSettled never rejects.
+
+    Promise.any will return the first promise that resolves, and it ignores all the rejected promises.
