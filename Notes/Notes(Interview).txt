@@ -1,0 +1,32 @@
+1. Hoisting
+    Hositing is the process in which the variables appear to move to the top level of the code. All var, let and const are
+    hoisted but var is initialized with undefined. let and Const cannot be printed because they are in temporal dead zone.
+    Their values cannot be accessed. 
+    Very Important thing to note here is that even if the variable is initialized, it will still print undefined because 
+    initialization is not hoisted.
+
+    Normal Functions are also hoisted. Arrow functions and function expressions are not hoisted.
+
+2. Pure Component is a component that only re-renders when its state or props passed to it change. Otherwise it does not
+    rerender.
+
+3. Execution Context: Execution Context is an environment where some javascript code is executed. The environment contains
+    all the necessary information for the code to execute. One global execution context is created and one execution context
+    per function is created.
+
+4. This keyword points to the owner of the function in which it was used. So if a function is used inside an object, this
+    points to the object.
+
+    Arrow functions do not have a this keyword.
+
+5. Promises: A promise is an object representing the eventual completion or failure of an asynchronous operation.
+
+    . pending: initial state, neither fulfilled nor rejected.
+    . fulfilled: meaning that the operation was completed successfully.
+    . rejected: meaning that the operation failed.
+
+    Non asynchronous tasks are executed by main thread and they get immediately added to the main stack. Asynchronous tasks
+    get added to callback queue. Only when main stack is empty the tasks are added from callback queue to main stack and then
+    executed.
+
+    Async/Await is a wrapper over then which can help improved readability of the code.
