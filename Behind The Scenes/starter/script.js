@@ -77,47 +77,126 @@
 // let y = 2;
 // const z = 3;
 
-console.log(this);
+// console.log(this);
 
-const calcAge = function (birthYear) {
-  console.log(2037 - birthYear);
-  console.log(this);
+// const calcAge = function (birthYear) {
+//   console.log(2037 - birthYear);
+//   console.log(this);
+// };
+
+// calcAge(1997);
+
+// const calcAgeArrow = birthYear => {
+//   console.log(2037 - birthYear);
+//   console.log(this);
+// };
+
+// calcAgeArrow(1997);
+
+// const jonas = {
+//   year: 1991,
+//   calcAge: function () {
+//     console.log(this);
+//     console.log(2037 - this.year);
+//   },
+// };
+
+// jonas.calcAge();
+
+// const matilda = {
+//   year: 2017,
+// };
+
+// matilda.calcAge = jonas.calcAge;
+// matilda.calcAge();
+
+// const taavish = {
+//   birthYear: 1997,
+//   data: {
+//     age: 26,
+//     calcAge: function () {
+//       console.log(this);
+//     },
+//   },
+// };
+
+// taavish.data.calcAge();
+
+// var firstName = 'Matilda'; //Creates a property on the window object
+
+// const jonas = {
+//   firstName: 'Jonas',
+//   year: 1991,
+//   calcAge: function () {
+//     console.log(this);
+//     console.log(2037 - this.year);
+
+//     //SOLUTION 1
+//     // const self = this;
+//     // const isMillenial = function () {
+//     //   console.log(self);
+//     //   console.log(self.year >= 1981 && self.year <= 1996);
+//     // };
+
+//     // isMillenial();
+
+//     //SOLUTION 2
+//     const isMillenial = () => {
+//       console.log(this);
+//       console.log(this.year >= 1981 && this.year <= 1996);
+//     };
+
+//     isMillenial();
+//   },
+//   greet: () => console.log(`Hey ${this.firstName}`),
+// };
+
+// jonas.greet();
+// jonas.calcAge();
+
+// let age = 30;
+// let oldAge = age;
+// age = 31;
+
+// console.log(age);
+// console.log(oldAge);
+
+// const me = {
+//   name: 'Jonas',
+//   age: 30,
+// };
+
+// const friend = me;
+// friend.age = 27;
+
+// console.log(me, friend);
+
+let lastName = 'Williams';
+let oldLastName = lastName;
+lastName = 'Davis';
+
+console.log(lastName);
+console.log(oldLastName);
+
+const jessica = {
+  firstName: 'Jessica',
+  lastName: 'Williams',
+  age: 27,
+  family: ['Alice', 'Bob'],
 };
 
-calcAge(1997);
+// const marriedJessica = jessica;
 
-const calcAgeArrow = birthYear => {
-  console.log(2037 - birthYear);
-  console.log(this);
-};
+// marriedJessica.lastName = 'Davis';
 
-calcAgeArrow(1997);
+// console.log(jessica);
+// console.log(marriedJessica);
 
-const jonas = {
-  year: 1991,
-  calcAge: function () {
-    console.log(this);
-    console.log(2037 - this.year);
-  },
-};
+const marriedJessica = Object.assign({}, jessica);
+//const marriedJessica = JSON.parse(JSON.stringify(jessica));
 
-jonas.calcAge();
-
-const matilda = {
-  year: 2017,
-};
-
-matilda.calcAge = jonas.calcAge;
-matilda.calcAge();
-
-const taavish = {
-  birthYear: 1997,
-  data: {
-    age: 26,
-    calcAge: function () {
-      console.log(this);
-    },
-  },
-};
-
-taavish.data.calcAge();
+marriedJessica.lastName = 'Davis';
+marriedJessica.family.push('Mary');
+marriedJessica.family.push('John');
+console.log(jessica);
+console.log(marriedJessica);
